@@ -14,7 +14,7 @@ const theme = createTheme({
 });
 
 const lightModeProperties = {
-    "--background": "f5f6f7",
+    "--background": "#eff2f8",
     "--background-1": "#ffffff",
     "--icons": "#025a63",
     "--document": "#ecebf3",
@@ -22,13 +22,13 @@ const lightModeProperties = {
     "--icons-rev": "#12c5d1",
     "--icons-bg": "#e5e3f3",
     "--button": "#178a84",
-    "--text": "#191c24",
+    "--text": "#13171f",
     "--f-weight":"600",
     "--gray-text": "rgb(79, 79, 79)",
     "--button-hover": "#178a84c2",
     "--button-hover-1": "rgb(182, 224, 229)",
     "--shadow": "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px",
-    "--card-hover": "#ededf0",
+    "--card-hover": "#eeedfe",
     "--active-bg": "#ffffff",
     "--light-hover": "#c8dddf",
     "--menu-hover": "#ecebf3",

@@ -8,16 +8,7 @@
     /* Changed from max-width to width */
     overflow: auto;
     background-color: var(--background-1);
-}
-
-.menu-names {
-    transition: all 10s ease-in;
-}
-
-
-
-.logo {
-    color: rgb(219, 95, 219);
+    border-right: 1px solid var(--border-color);
 }
 
 .app-sidebar:hover .menu-names {
@@ -119,11 +110,11 @@ p {
 }
 
 .link:hover {
-    background-color: #0f1015;
+    background-color: var(--card-hover);
 }
 
 .list-items:hover .link {
-    color: white;
+    
 }
 
 .link {
@@ -143,6 +134,7 @@ p {
     background-color: #0f1015;
     box-sizing: border-box;
     background: #695cfe;
+    color: white;
 }
 
 
@@ -152,6 +144,11 @@ p {
     -webkit-text-fill-color: transparent; */
 }
 
+.logo{
+    background: #c94b4b;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #4b134f, #c94b4b);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #4b134f, #c94b4b); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
 
 .logout-button {
     width: 100%;
