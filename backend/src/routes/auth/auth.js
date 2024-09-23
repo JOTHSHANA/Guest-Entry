@@ -51,7 +51,7 @@ router.get("/google/callback", passport.authenticate("google", { failureRedirect
         }
     } catch (error) {
         console.error("Error fetching allowed routes:", error);
-        res.redirect(`${process.env.CLIENT_URL}/error`);
+        res.redirect(`${process.env.CLIENT_URL}/login`);
     }
 });
 
@@ -65,15 +65,15 @@ const generateToken = (user) => {
 };
 
 // Logout route
-router.post("/logout", (req, res) => {
-    removeEncryptedCookie(res, "userData"); // Clear the user data cookie
-    req.logout((err) => {
-        if (err) {
-            return res.status(500).json({ message: "Error during logout" });
-        }
-        return res.status(200).json({ message: "Logout successful" });
-    });
-});
+// router.post("/logout", (req, res) => {
+//     removeEncryptedCookie(res, "userData"); // Clear the user data cookie
+//     req.logout((err) => {
+//         if (err) {
+//             return res.status(500).json({ message: "Error during logout" });
+//         }
+//         return res.status(200).json({ message: "Logout successful" });
+//     });
+// });
 
 // Example route to get user data from cookies
 

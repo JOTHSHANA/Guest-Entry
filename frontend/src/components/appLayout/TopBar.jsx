@@ -20,6 +20,7 @@ import CryptoJS from "crypto-js";
 import login_img from '../../assets/login_img.png';
 import Groups2Icon from '@mui/icons-material/Groups2';
 import { getDecryptedCookie, removeEncryptedCookie } from "../utils/encrypt";
+import requestApi from "../utils/axios";
 
 const secretKey = "this is my secret code";
 function TopBar(props) {
@@ -52,23 +53,36 @@ function TopBar(props) {
         setAnchorEl(null);
     };
 
+    // const handleLogout = async () => {
+
+    //     try {
+    //         Cookies.remove("token");
+    //         Cookies.remove('name')
+    //         Cookies.remove('id')
+    //         Cookies.remove('role')
+    //         Cookies.remove('profile')
+    //         Cookies.remove('gmail')
+    //         Cookies.remove('roll')
+    //         Cookies.remove('allowedRoutes')
+
+    //         navigate('/materials/login')
+    //         console.log(token)
+    //     }
+    //     catch (err) {
+    //         console.log(err)
+    //     }
+    // };
+
+
     const handleLogout = async () => {
-
         try {
-            Cookies.remove("token");
-            Cookies.remove('name')
-            Cookies.remove('id')
-            Cookies.remove('role')
-            Cookies.remove('profile')
-            Cookies.remove('gmail')
-            Cookies.remove('roll')
-            Cookies.remove('allowedRoutes')
-
-            navigate('/materials/login')
-            console.log(token)
-        }
-        catch (err) {
-            console.log(err)
+            // await requestApi("POST", "/auth/logout");
+            const cookiesToRemove = ["token", "name", "role", "id", "roll", "gmail", "profile", "allowedRoutes"];
+            cookiesToRemove.forEach((key) => removeEncryptedCookie(key));
+            navigate("/materials/login");
+        } catch (error) {
+            console.error("Logout failed", error);
+            navigate("/materials/login");
         }
     };
 
@@ -86,7 +100,7 @@ function TopBar(props) {
                 padding: "7px 7px",
                 justifyContent: "space-between",
                 alignItems: "center",
-                borderBottom:"1px solid var(--border-color)",
+                borderBottom: "1px solid var(--border-color)",
                 gap: 20,
             }}
         >
@@ -99,16 +113,18 @@ function TopBar(props) {
                     width: "100%"
                 }}
             >
-                <div onClick={props.sidebar} className="sidebar-menu">
-                    <MenuIcon />
-                </div>
-                <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                    <div className="logo" style={{ display: "flex", alignItems: "center", justifyContent: "center", padding: "5px", borderRadius: "5px", backgroundColor: "#695dfe", height: "fit-content", marginLeft: "5px" }}>
-                        <Groups2Icon sx={{ fontSize: "30px", color:"white" }} />
+                <div style={{ display: "flex" }}>
+                    <div onClick={props.sidebar} className="sidebar-menu">
+                        <MenuIcon />
                     </div>
-                    <div style={{ display: "flex", flexDirection: "column" }}>
-                        <div className="app-name gradient-text" ><b>GUEST ENTRY</b></div>
-                        <p style={{ fontSize: "12px", color: "gray", fontWeight:"700" }}>Make it simple</p>
+                    <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                        <div className="logo" style={{ display: "flex", alignItems: "center", justifyContent: "center", padding: "5px", borderRadius: "5px", backgroundColor: "#695dfe", height: "fit-content", marginLeft: "5px" }}>
+                            <Groups2Icon sx={{ fontSize: "30px", color: "white" }} />
+                        </div>
+                        <div style={{ display: "flex", flexDirection: "column" }}>
+                            <div className="app-name gradient-text" ><b>GUEST ENTRY</b></div>
+                            <p style={{ fontSize: "12px", color: "gray", fontWeight: "700" }}>Make it simple</p>
+                        </div>
                     </div>
                 </div>
                 <div className="top-bar-menus">

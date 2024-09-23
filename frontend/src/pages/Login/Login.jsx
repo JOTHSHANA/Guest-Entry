@@ -8,7 +8,7 @@ import CustomizedSwitches from '../../components/appLayout/toggleTheme';
 
 function Login() {
     const handleGoogleLogin = () => {
-        console.log("asdjbdhjbd")
+        // console.log("asdjbdhjbd")
         window.location.href = `${apiHost}/api/auth/google`;
     };
     return (

@@ -13,9 +13,9 @@ function GuestEntry() {
 function Body() {
     
     return (
-        <>
-            guest
-        </>
+        <div className="guest-listing-page">
+            
+        </div>
     );
 }
 

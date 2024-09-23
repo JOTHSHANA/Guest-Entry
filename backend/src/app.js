@@ -11,6 +11,7 @@ const passport = require("passport");
 const passportConfig = require("./config/passport")
 const resourceRoutes = require('./routes/resourceRoutes');
 const auth = require('./routes/auth/auth')
+const guestDetails = require('./routes/formDetailsRoutes')
 
 app.use(
     session({
@@ -34,6 +35,7 @@ app.use(bodyParser.json());
 
 app.use(`${process.env.API}/api`, resources);
 app.use(`${process.env.API}/api/auth`, auth);
+app.use(`${process.env.API}/api`, guestDetails);
 
 
 const PORT = process.env.PORT || 5000;
