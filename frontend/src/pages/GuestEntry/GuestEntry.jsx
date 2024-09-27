@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import './GuestEntry.css';
 import requestApi from "../../components/utils/axios";
 
@@ -24,6 +24,8 @@ function Body() {
     const [fromDate, setFromDate] = useState('');
     const [toDate, setToDate] = useState('');
     const [availedDays, setAvailedDays] = useState('');
+
+    const [draftGuests, setDraftGuest] = useState([]);
 
 
     const handleTabClick = (tabIndex) => {
@@ -60,12 +62,38 @@ function Body() {
         }
     };
 
+    const fetchDraftGuests = async (req, res) => {
+        try {
+            const response = await requestApi("GET", `/api/getDraftGuests`, {});
+            console.log(response.data)
+            const { draftGuests } = response.data
+            setDraftGuest(draftGuests)
+        }
+        catch {
+            console.error('Error fetching draft profiles');
+        }
+    }
+
+    useEffect(() => {
+        fetchDraftGuests();
+    }, [])
+
 
     return (
         <div className="guest-listing-page">
             <div className="info-container">
-
+                {draftGuests.map((draftGuest, index) => (
+                    <div className="profile-card" key={index}>
+                        <p>Name: {draftGuest.name}</p>
+                        <p>Email: {draftGuest.mail_id}</p>
+                        <p>Phone: {draftGuest.phone_no || 'N/A'}</p>
+                        <p>Purpose: {draftGuest.purpose}</p>
+                        <p>Visit Mode: {draftGuest.visit_mode}</p>
+                        {/* Add more details as needed */}
+                    </div>
+                ))}
             </div>
+
             <div className="form-container">
                 <div className="tabs">
                     <div className="u-list">

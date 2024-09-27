@@ -100,8 +100,10 @@
 .input-group select {
     width: 100%;
     padding: 8px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--border-color);
     border-radius: 4px;
+    background-color: var(--background-1);
+    color: var(--text);
 }
 
 button {
@@ -123,4 +125,14 @@ button:hover {
     font-size: 14px;
     color: var(--text);
     text-align: center;
+}
+
+
+.profile-card {
+    display: flex;
+    margin: 10px;
+    flex-direction: column;
+    background-color: var(--background-1);
+    border: 1px solid var(--border-color);
+    padding: 7px;
 }
