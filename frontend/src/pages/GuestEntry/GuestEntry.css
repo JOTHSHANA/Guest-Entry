@@ -1,3 +1,126 @@
-.guest-listing-page{
-    
+.guest-listing-page {
+    background-color: var(--border-color);
+    border: 1px solid var(--border-color);
+    height: 100%;
+    border-radius: 5px;
+    display: flex;
+    gap: 0.9px;
+}
+
+.form-container {
+    flex: 1.5;
+    background-color: var(--background-1);
+    border-radius: 5px;
+    overflow: auto;
+}
+
+.info-container {
+    flex: 1;
+    background-color: var(--background-1);
+    border-radius: 5px;
+    padding: 10px;
+
+}
+
+.u-list {
+    display: flex;
+    border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    background-color: var(--background-1);
+}
+
+.u-list p {
+    flex: 1;
+    text-decoration: none;
+
+}
+
+
+
+.tabs {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.u-list {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.u-list p {
+    cursor: pointer;
+    padding: 10px 20px;
+    border-bottom: 2px solid transparent;
+    font-weight: 500;
+    color: var(--text);
+    flex: 1;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.u-list p:hover {
+    color: #4b95e5;
+}
+
+.u-list p.active {
+    border-bottom: 2px solid #007bff;
+    color: #007bff;
+}
+
+.form-content {
+    box-sizing: border-box;
+    border-radius: 8px;
+    background-color: var(--background);
+    width: calc(100% - 20px);
+    margin: 10px;
+    padding: 10px;
+}
+
+.form-content p {
+    margin: 0;
+    color: var(--text);
+    font-size: 16px;
+}
+
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    display: block;
+    color: var(--text);
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.input-group input,
+.input-group select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 7px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.info-container {
+    font-size: 14px;
+    color: var(--text);
+    text-align: center;
 }

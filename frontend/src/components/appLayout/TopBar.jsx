@@ -123,7 +123,7 @@ function TopBar(props) {
                         </div>
                         <div style={{ display: "flex", flexDirection: "column" }}>
                             <div className="app-name gradient-text" ><b>GUEST ENTRY</b></div>
-                            <p style={{ fontSize: "12px", color: "gray", fontWeight: "700" }}>Make it simple</p>
+                            <p style={{ fontSize: "12px", color: "gray", fontWeight: "600" }}>Make it simple</p>
                         </div>
                     </div>
                 </div>
