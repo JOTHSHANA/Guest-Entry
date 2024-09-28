@@ -74,6 +74,7 @@
     box-sizing: border-box;
     border-radius: 8px;
     background-color: var(--background);
+    border: 1px solid var(--border-color);
     width: calc(100% - 20px);
     margin: 10px;
     padding: 10px;
@@ -127,12 +128,28 @@ button:hover {
     text-align: center;
 }
 
-
 .profile-card {
     display: flex;
-    margin: 10px;
+    margin: 7px;
+}
+
+.profile-image {
+    width: 50px;
+}
+
+.profile-details {
+    flex: 1;
+    display: flex;
+    border: 2px solid var(--border-color);
+    border-radius: 10px;
+}
+
+.profile-info{
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
     flex-direction: column;
-    background-color: var(--background-1);
-    border: 1px solid var(--border-color);
-    padding: 7px;
+    justify-content: center;
+    padding: 5px;
+    position: relative;
 }

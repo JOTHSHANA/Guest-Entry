@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import './GuestEntry.css';
 import requestApi from "../../components/utils/axios";
+import profile from '../../assets/profile.png'
 
 function GuestEntry() {
     return <Body />
@@ -84,17 +85,28 @@ function Body() {
             <div className="info-container">
                 {draftGuests.map((draftGuest, index) => (
                     <div className="profile-card" key={index}>
-                        <p>Name: {draftGuest.name}</p>
-                        <p>Email: {draftGuest.mail_id}</p>
-                        <p>Phone: {draftGuest.phone_no || 'N/A'}</p>
-                        <p>Purpose: {draftGuest.purpose}</p>
-                        <p>Visit Mode: {draftGuest.visit_mode}</p>
-                        {/* Add more details as needed */}
+                        <div className="profile-image">
+                        </div>
+                        <div className="profile-details">
+                            <div style={{ width: "50px", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                                <img style={{ width: "90px", position: "relative", right: "50%", border: "1px solid var(--border-color)", borderRadius: "100%" }} src={profile} alt="" />
+                            </div>
+
+                            <div className="profile-info">
+                                <p style={{ fontSize: "18px", fontWeight: "500" }}>{draftGuest.name}</p>
+                                <p style={{ color: "#0a91fa", fontWeight: "600" }}>{draftGuest.mail_id}</p>
+                                <p>{draftGuest.phone_no || 'N/A'}</p>
+                                <p><b>Purpose: </b>{draftGuest.purpose}</p>
+                                <p style={{ position: "absolute", top: "5px", right: "10px", backgroundColor: "rgba(25, 193, 176, 0.223)", padding: "3px 10px", borderRadius: "10px" }}>{draftGuest.visit_mode}</p>
+                            </div>
+                        </div>
+
                     </div>
                 ))}
             </div>
 
             <div className="form-container">
+
                 <div className="tabs">
                     <div className="u-list">
                         <p
@@ -108,6 +120,7 @@ function Body() {
                             Professional Information
                         </p>
                     </div>
+                    <div style={{ marginLeft: "10px", fontWeight: '600' }}>New Guest</div>
                     <div className="form-content">
                         {activeTab === 1 && (
                             <div className="form">
