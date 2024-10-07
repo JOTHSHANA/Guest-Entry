@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter } from "react-router-dom";
-import { Toaster } from "react-hot-toast";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import AppRoutes from "./Routes/index";
 import Loader from "./components/Loader/Loader";
 
@@ -22,7 +23,7 @@ function App() {
 
   return (
     <div>
-      <Toaster position="top-center" reverseOrder={false} />
+      <ToastContainer />
       <AppRoutes />
     </div>
   );

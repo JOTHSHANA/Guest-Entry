@@ -23,6 +23,7 @@ const lightModeProperties = {
     "--icons-bg": "#e5e3f3",
     "--button": "#178a84",
     "--text": "#13171f",
+    "--card-c":"rgba(34, 148, 224, 0.442)",
     "--f-weight":"600",
     "--gray-text": "rgb(79, 79, 79)",
     "--button-hover": "#178a84c2",
@@ -36,7 +37,7 @@ const lightModeProperties = {
     "--wb":"#191c24",
     "--grad": "linear-gradient(110deg, hsl(184deg 84% 45%) 0%, hsl(186deg 55% 81%) 32%, hsl(0deg 0% 100%) 48%, hsl(0deg 0% 100%) 58%, hsl(0deg 0% 100%) 100%)",
     "--float": "linear-gradient(115deg,hsl(232deg 17% 17%) 0%,hsl(232deg 17% 17%) 20%,hsl(232deg 17% 17%) 40%,hsl(231deg 17% 21%) 50%,hsl(231deg 16% 24%) 63%,hsl(231deg 16% 24%) 81%,hsl(231deg 16% 24%) 100%)",
-
+    
 
 };
 
@@ -50,6 +51,7 @@ const darkModeProperties = {
     "--icons-bg": "#2a2d3b",
     "--button": "#178a84",
     "--text": "#e6e6e6",
+    "--card-c":"rgba(211, 211, 211, 0.103)",
     "--f-weight":"600",
     "--active-bg": "#2a2d3b",
     "--gray-text": "rgb(255, 255, 255)",

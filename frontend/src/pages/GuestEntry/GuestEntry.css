@@ -86,11 +86,16 @@
     font-size: 16px;
 }
 
-.input-group {
+.input-group, .input-group1 {
     margin-bottom: 15px;
+    gap: 5px;
 }
 
-.input-group label {
+.input-group1{
+    display: flex;
+}
+
+.input-group label, .input-group1 label{
     display: block;
     color: var(--text);
     font-weight: 500;
@@ -98,7 +103,8 @@
 }
 
 .input-group input,
-.input-group select {
+.input-group select, .input-group1 input,
+.input-group1 select {
     width: 100%;
     padding: 8px;
     border: 1px solid var(--border-color);
@@ -126,11 +132,15 @@ button:hover {
     font-size: 14px;
     color: var(--text);
     text-align: center;
+    overflow: auto;
 }
 
 .profile-card {
     display: flex;
     margin: 7px;
+    background-color: var(--card-c);
+    border-radius: 7px;
+    cursor: pointer;
 }
 
 .profile-image {
@@ -140,8 +150,11 @@ button:hover {
 .profile-details {
     flex: 1;
     display: flex;
-    border: 2px solid var(--border-color);
-    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 0px 70px 0px 200px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    padding: 10px 0px;
+    background-color: var(--background);
 }
 
 .profile-info{
@@ -153,3 +166,17 @@ button:hover {
     padding: 5px;
     position: relative;
 }
+
+.draft-topic{
+    margin: 4px;
+    font-size: 18px;
+    font-weight: 600;
+    display: flex;
+    align-items: flex-start;
+    position: sticky;
+    top: 0;
+    background-color: var(--background-1);
+    z-index: 10;
+    padding: 10px;
+}
+

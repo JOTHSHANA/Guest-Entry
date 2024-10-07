@@ -43,23 +43,50 @@ exports.createGuest = (req, res) => {
             });
     });
 
-    // Once all promises are resolved, insert into guests table
+    // Once all promises are resolved, insert into guests table with default status 'draft'
     Promise.all([insertPersonal, insertProfessional, insertEvent])
         .then(([personalId, professionalId, eventId]) => {
-            db.query('INSERT INTO guests (personal, professional, event) VALUES (?, ?, ?)',
-                [personalId, professionalId, eventId], (err, result) => {
+            db.query('INSERT INTO guests (personal, professional, event, status) VALUES (?, ?, ?, ?)',
+                [personalId, professionalId, eventId, 'draft'], (err, result) => {
                     if (err) {
                         console.error('Error linking guest details:', err);
                         return res.status(500).json({ error: 'Error linking guest details' });
                     }
 
-                    res.json({
-                        success: true,
-                        guestId: result.insertId,
-                        personalId,
-                        professionalId,
-                        eventId
-                    });
+                    const guestId = result.insertId;
+
+                    // Check if all fields are non-null
+                    if (name && mail_id && dob && phone_no && gender && address &&
+                        qualification && company_name && company_role &&
+                        visit_mode && purpose && from_date && to_date && availed_days) {
+
+                        // Update the status to 'final' if all values are present
+                        db.query('UPDATE guests SET status = ? WHERE id = ?', ['final', guestId], (err) => {
+                            if (err) {
+                                console.error('Error updating guest status:', err);
+                                return res.status(500).json({ error: 'Error updating guest status' });
+                            }
+
+                            return res.json({
+                                success: true,
+                                guestId,
+                                personalId,
+                                professionalId,
+                                eventId,
+                                status: 'final'
+                            });
+                        });
+                    } else {
+                        // If not all fields are present, respond with default 'draft' status
+                        res.json({
+                            success: true,
+                            guestId,
+                            personalId,
+                            professionalId,
+                            eventId,
+                            status: 'draft'
+                        });
+                    }
                 });
         })
         .catch(error => {
@@ -67,7 +94,6 @@ exports.createGuest = (req, res) => {
             res.status(500).json({ error: 'An error occurred while inserting guest details' });
         });
 };
-
 
 
 
