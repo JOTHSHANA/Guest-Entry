@@ -77,7 +77,6 @@ exports.createGuest = (req, res) => {
                             });
                         });
                     } else {
-                        // If not all fields are present, respond with default 'draft' status
                         res.json({
                             success: true,
                             guestId,
@@ -99,13 +98,12 @@ exports.createGuest = (req, res) => {
 
 exports.updateGuest = (req, res) => {
     const {
-        guestId, // Assume guestId is passed in the body
+        guestId, 
         name, mail_id, dob, phone_no, gender, address,
         qualification, company_name, company_role,
         visit_mode, purpose, from_date, to_date, availed_days
     } = req.body;
 
-    // First, retrieve the personal, professional, and event IDs associated with the guest
     db.query('SELECT personal, professional, event FROM guests WHERE id = ?', [guestId], (err, result) => {
         if (err) {
             console.error('Error retrieving guest details:', err);
@@ -114,7 +112,6 @@ exports.updateGuest = (req, res) => {
 
         const { personal, professional, event } = result[0];
 
-        // Update personal_details
         const updatePersonal = new Promise((resolve, reject) => {
             db.query('UPDATE personal_details SET name = ?, mail_id = ?, dob = ?, phone_no = ?, gender =?, address = ? WHERE id = ?',
                 [name || null, mail_id || null, dob || null, phone_no || null, gender || null, address || null, personal], (err, result) => {
@@ -126,7 +123,6 @@ exports.updateGuest = (req, res) => {
                 });
         });
 
-        // Update professional_details
         const updateProfessional = new Promise((resolve, reject) => {
             db.query('UPDATE professional_details SET qualification = ?, company_name = ?, company_role = ? WHERE id = ?',
                 [qualification || null, company_name || null, company_role || null, professional], (err, result) => {
@@ -138,7 +134,6 @@ exports.updateGuest = (req, res) => {
                 });
         });
 
-        // Update event details
         const updateEvent = new Promise((resolve, reject) => {
             db.query('UPDATE events SET visit_mode = ?, purpose = ?, from_date = ?, to_date = ?, availed_days = ? WHERE id = ?',
                 [visit_mode || null, purpose || null, from_date || null, to_date || null, availed_days || null, event], (err, result) => {
@@ -150,7 +145,6 @@ exports.updateGuest = (req, res) => {
                 });
         });
 
-        // Once all updates are completed, return success response
         Promise.all([updatePersonal, updateProfessional, updateEvent])
             .then(() => {
                 res.json({

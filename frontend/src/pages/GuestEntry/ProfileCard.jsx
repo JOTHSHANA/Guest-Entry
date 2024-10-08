@@ -1,16 +1,14 @@
 import React from 'react';
 import './GuestEntry.css';
-import maleProfile from '../../assets/male.png';  // Import male profile image
-import femaleProfile from '../../assets/female.png';  // Import female profile image
-import defaultProfile from '../../assets/profile.png';  // Import default profile image
+import maleProfile from '../../assets/male.png';
+import femaleProfile from '../../assets/female.png';
+import defaultProfile from '../../assets/profile.png';
 import EmailIcon from '@mui/icons-material/Email';
 import CallIcon from '@mui/icons-material/Call';
 
-function ProfileCard({ draftGuest }) {
+function ProfileCard({ draftGuest, onSelectGuest, isSelected }) {
 
     const getProfileImage = (gender) => {
-        // const normalizedGender = gender ? gender.toLowerCase() : null;
-        console.log(gender)
         if (gender === 'Male') {
             return maleProfile;
         } else if (gender === 'Female') {
@@ -20,10 +18,11 @@ function ProfileCard({ draftGuest }) {
         }
     };
 
-
-
     return (
-        <div className="profile-card">
+        <div
+            className={`profile-card ${isSelected ? 'selected' : ''}`}  // Add selected class
+            onClick={onSelectGuest}  // Trigger selection
+        >
             <div className="profile-image">
             </div>
             <div className="profile-details">
@@ -37,8 +36,14 @@ function ProfileCard({ draftGuest }) {
 
                 <div className="profile-info">
                     <p style={{ fontSize: "18px", fontWeight: "500" }}>{draftGuest.name || '--'}</p>
-                    <p style={{ color: "#0a91fa", fontWeight: "400", display: "flex", alignItems: "center" }}> <EmailIcon style={{ marginRight: "5px", color: "#6c7293", fontSize: "20px" }} />{draftGuest.mail_id || '--'}</p>
-                    <p style={{ color: "#0a91fa", fontWeight: "400", display: "flex", alignItems: "center" }}> <CallIcon style={{ marginRight: "5px", color: "#6c7293", fontSize: "20px" }} />{draftGuest.phone_no || '--'}</p>
+                    <p style={{ color: "#0a91fa", fontWeight: "400", display: "flex", alignItems: "center" }}>
+                        <EmailIcon style={{ marginRight: "5px", color: "#6c7293", fontSize: "20px" }} />
+                        {draftGuest.mail_id || '--'}
+                    </p>
+                    <p style={{ color: "#0a91fa", fontWeight: "400", display: "flex", alignItems: "center" }}>
+                        <CallIcon style={{ marginRight: "5px", color: "#6c7293", fontSize: "20px" }} />
+                        {draftGuest.phone_no || '--'}
+                    </p>
                     <p><b>Purpose: </b>{draftGuest.purpose || '--'}</p>
                     <p
                         style={{
@@ -52,7 +57,6 @@ function ProfileCard({ draftGuest }) {
                     >
                         {draftGuest.visit_mode}
                     </p>
-
                 </div>
             </div>
         </div>

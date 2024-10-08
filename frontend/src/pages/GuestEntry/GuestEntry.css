@@ -180,3 +180,11 @@ button:hover {
     padding: 10px;
 }
 
+
+
+
+
+.profile-card.selected {
+    background-color: #e6f7ff; /* Highlight color for selected card */
+    border: 1px solid #007bff; /* Border color for selected card */
+}
