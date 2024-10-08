@@ -40,6 +40,9 @@ function Body() {
     const [pdfContent, setPdfContent] = useState(null);
     const [searchQuery, setSearchQuery] = useState('');
     const [draftGuests, setDraftGuest] = useState([]);
+    const [openDialog, setOpenDialog] = useState(false);
+    const [guestDraftProfile, setGuestDraftProfile] = useState();
+
 
     const fetchCompletedGuests = async () => {
         try {
@@ -73,6 +76,27 @@ function Body() {
         setShowPreviewModal(false);
     };
 
+
+    const fetchDraftDetail = async (guestId) => {
+        try {
+            const response = await requestApi("GET", `/api/guest?guestId=${guestId}`, {});
+            setGuestDraftProfile(response.data)
+            console.log(guestDraftProfile)
+
+        } catch (error) {
+            console.error('Error fetching draft profiles');
+        }
+    }
+
+    const handleCardClick = (guestId) => {
+        setOpenDialog(true);
+        fetchDraftDetail(guestId)
+    };
+
+    // Handler to close dialog
+    const handleCloseDialog = () => {
+        setOpenDialog(false);
+    };
 
     const fetchDraftGuests = async () => {
         try {
@@ -196,9 +220,6 @@ function Body() {
 
 
     const [state, setState] = React.useState({
-        top: false,
-        left: false,
-        bottom: false,
         right: false,
     });
 
@@ -214,15 +235,17 @@ function Body() {
         <Box
             sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 480 }}
             role="presentation"
-            onClick={toggleDrawer(anchor, false)}
             onKeyDown={toggleDrawer(anchor, false)}
         >
             <p className="draft-topic">Draft Profiles</p>
             {draftGuests.map((draftGuest, index) => (
-                <ProfileCard key={index} draftGuest={draftGuest} profileImage={profile} />
+                <div onClick={() => handleCardClick(draftGuest.guestId)}>
+                    <ProfileCard key={index} draftGuest={draftGuest} profileImage={profile} />
+                </div>
             ))}
         </Box>
     );
+
     return (
         <div className="dashboard">
             <div className="search-div">
@@ -244,7 +267,7 @@ function Body() {
                                 open={state[anchor]}
                                 onClose={toggleDrawer(anchor, false)}
                             >
-                                <div style={{backgroundColor:"var(--background-1)"}}>{list(anchor)}</div>
+                                <div style={{ backgroundColor: "var(--background-1)" }}>{list(anchor)}</div>
                             </Drawer>
                         </React.Fragment>
                     ))}
@@ -258,11 +281,11 @@ function Body() {
                             <img src={getProfileImage(guest.gender)} alt="Guest Profile" />
                             <h4>{guest.name}</h4>
                             <div className="contact-profile-info">
-                                <p style={{ color: "#0a91fa", fontWeight: "450", display: "flex", alignItems: "center" }}>
-                                    <EmailIcon style={{ marginRight: "7px", color: "#6c7293", fontSize: "20px" }} />{guest.mail_id}
+                                <p style={{ color: "#0a91fa", fontWeight: "400", display: "flex", alignItems: "center" }}>
+                                    <EmailIcon style={{ marginRight: "5px", color: "#6c7293", fontSize: "20px" }} />{guest.mail_id}
                                 </p>
-                                <p style={{ fontWeight: "600", display: "flex", alignItems: "center" }}>
-                                    <CallIcon style={{ marginRight: "7px", color: "#6c7293", fontSize: "20px" }} />
+                                <p style={{ fontWeight: "400", display: "flex", alignItems: "center" }}>
+                                    <CallIcon style={{ marginRight: "5px", color: "#6c7293", fontSize: "20px" }} />
                                     {guest.phone_no}
                                 </p>
                             </div>
@@ -380,6 +403,79 @@ function Body() {
                     </DialogActions>
                 </div>
             </Dialog>
+
+            <Dialog
+                open={openDialog}
+                onClose={handleCloseDialog}
+                fullWidth
+                maxWidth="sm"
+            >
+                <DialogTitle>{guestDraftProfile ? guestDraftProfile.guest.name : "Profile Details"}</DialogTitle>
+                <DialogContent dividers>
+                    {guestDraftProfile ? (
+                        <div>
+                            <div className="modal-row">
+                                    <b>Email:</b>
+                                    <span>{guestDraftProfile.guest.mail_id || "--"}</span>
+                                </div>
+                                <div className="modal-row">
+                                    <b>DOB:</b>
+                                    <span>{new Date(guestDraftProfile.guest.dob).toLocaleDateString() || "--"}</span>
+                                </div>
+                                <div className="modal-row">
+                                    <b>Phone Number:</b>
+                                    <span>{guestDraftProfile.guest.phone_no || "--"}</span>
+                                </div>
+                                <div className="modal-row">
+                                    <b>Gender:</b>
+                                    <span>{guestDraftProfile.guest.gender || "--"}</span>
+                                </div>
+                                <div className="modal-row">
+                                    <b>Address:</b>
+                                    <span>{guestDraftProfile.guest.address || "--"}</span>
+                                </div>
+                                <div className="modal-row">
+                                    <b>Qualification:</b>
+                                    <span>{guestDraftProfile.guest.qualification || "--"}</span>
+                                </div>
+                                <div className="modal-row">
+                                    <b>Company Name:</b>
+                                    <span>{guestDraftProfile.guest.company_name || "--"}</span>
+                                </div>
+                                <div className="modal-row">
+                                    <b>Company Role:</b>
+                                    <span>{guestDraftProfile.guest.company_role || "--"}</span>
+                                </div>
+                                <div className="modal-row">
+                                    <b>Visit Mode:</b>
+                                    <span>{guestDraftProfile.guest.visit_mode || "--"}</span>
+                                </div>
+                                <div className="modal-row">
+                                    <b>Purpose:</b>
+                                    <span>{guestDraftProfile.guest.purpose || "--"}</span>
+                                </div>
+                                <div className="modal-row">
+                                    <b>From Date:</b>
+                                    <span>{new Date(guestDraftProfile.guest.from_date).toLocaleDateString() || "--"}</span>
+                                </div>
+                                <div className="modal-row">
+                                    <b>To Date:</b>
+                                    <span>{new Date(guestDraftProfile.guest.to_date).toLocaleDateString() || "--"}</span>
+                                </div>
+                                <div className="modal-row">
+                                    <b>Availed Days:</b>
+                                    <span>{guestDraftProfile.guest.availed_days || "--"}</span>
+                                </div>
+                        </div>
+                    ) : (
+                        <p>Loading profile details...</p>
+                    )}
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleCloseDialog}>Close</Button>
+                </DialogActions>
+            </Dialog>
+
         </div>
     );
 }

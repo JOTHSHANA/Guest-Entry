@@ -76,7 +76,6 @@ function TopBar(props) {
 
     const handleLogout = async () => {
         try {
-            // await requestApi("POST", "/auth/logout");
             const cookiesToRemove = ["token", "name", "role", "id", "roll", "gmail", "profile", "allowedRoutes"];
             cookiesToRemove.forEach((key) => removeEncryptedCookie(key));
             navigate("/materials/login");

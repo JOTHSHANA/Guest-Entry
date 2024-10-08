@@ -216,6 +216,63 @@ exports.getCompletedGuests = (req, res) => {
 };
 
 
+exports.getGuest = (req, res) => {
+    const { guestId } = req.query; // Retrieve guestId from the query string
+
+    // Check if guestId is provided
+    if (!guestId) {
+        return res.status(400).json({ error: 'guestId is required' });
+    }
+
+    // Define the query to get guest details
+    const query = `
+        SELECT 
+            g.id AS guestId,
+            pd.name,
+            pd.mail_id,
+            pd.dob,
+            pd.phone_no,
+            pd.gender,
+            pd.address,
+            prd.qualification,
+            prd.company_name,
+            prd.company_role,
+            ev.visit_mode,
+            ev.purpose,
+            ev.from_date,
+            ev.to_date,
+            ev.availed_days
+        FROM 
+            guests g
+        JOIN 
+            personal_details pd ON g.personal = pd.id
+        JOIN 
+            professional_details prd ON g.professional = prd.id
+        JOIN 
+            events ev ON g.event = ev.id
+        WHERE 
+            g.id = ? AND g.status = 'draft'
+    `;
+
+    // Execute the query
+    db.query(query, [guestId], (err, results) => {
+        if (err) {
+            console.error('Error fetching guest details:', err);
+            return res.status(500).json({ error: 'Error fetching guest details' });
+        }
+
+        // Check if any results were found
+        if (results.length === 0) {
+            return res.status(404).json({ error: 'Guest not found' });
+        }
+
+        // Return the guest details
+        res.json({
+            success: true,
+            guest: results[0] // Send back the first (and should be only) result
+        });
+    });
+};
 
 
 

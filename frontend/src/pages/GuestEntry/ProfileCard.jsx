@@ -3,6 +3,8 @@ import './GuestEntry.css';
 import maleProfile from '../../assets/male.png';  // Import male profile image
 import femaleProfile from '../../assets/female.png';  // Import female profile image
 import defaultProfile from '../../assets/profile.png';  // Import default profile image
+import EmailIcon from '@mui/icons-material/Email';
+import CallIcon from '@mui/icons-material/Call';
 
 function ProfileCard({ draftGuest }) {
 
@@ -34,10 +36,10 @@ function ProfileCard({ draftGuest }) {
                 </div>
 
                 <div className="profile-info">
-                    <p style={{ fontSize: "18px", fontWeight: "500" }}>{draftGuest.name}</p>
-                    <p style={{ color: "#0a91fa", fontWeight: "600" }}>{draftGuest.mail_id}</p>
-                    <p>{draftGuest.phone_no || 'N/A'}</p>
-                    <p><b>Purpose: </b>{draftGuest.purpose}</p>
+                    <p style={{ fontSize: "18px", fontWeight: "500" }}>{draftGuest.name || '--'}</p>
+                    <p style={{ color: "#0a91fa", fontWeight: "400", display: "flex", alignItems: "center" }}> <EmailIcon style={{ marginRight: "5px", color: "#6c7293", fontSize: "20px" }} />{draftGuest.mail_id || '--'}</p>
+                    <p style={{ color: "#0a91fa", fontWeight: "400", display: "flex", alignItems: "center" }}> <CallIcon style={{ marginRight: "5px", color: "#6c7293", fontSize: "20px" }} />{draftGuest.phone_no || '--'}</p>
+                    <p><b>Purpose: </b>{draftGuest.purpose || '--'}</p>
                     <p
                         style={{
                             position: "absolute",
