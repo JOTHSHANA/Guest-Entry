@@ -151,7 +151,7 @@ button:hover {
     flex: 1;
     display: flex;
     border: 1px solid var(--border-color);
-    border-radius: 0px 70px 0px 200px;
+    border-radius: 0px 70px 10px 200px;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     padding: 10px 0px;
     background-color: var(--background);
@@ -185,6 +185,5 @@ button:hover {
 
 
 .profile-card.selected {
-    background-color: #e6f7ff; /* Highlight color for selected card */
-    border: 1px solid #007bff; /* Border color for selected card */
+    border: 2px solid #007bff; /* Border color for selected card */
 }

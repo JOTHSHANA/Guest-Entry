@@ -295,7 +295,7 @@ function Body() {
                     ))}
                 </div>
             ) : (
-                <p>No completed guests found.</p>
+                <p>No guests found.</p>
             )}
 
             {selectedGuest && (
